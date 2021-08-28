@@ -1,8 +1,8 @@
 module.exports = {
-  title: `Hayoung Devlog`,
-  description: `Blog posted about ...`,
-  author: `[Hayoung]`,
-  introduction: `I explain with words and code. I explain with words and code. I explain with words and code.`,
+  title: `HIYoung Devlog`,
+  description: `Blog posted about My de`,
+  author: `[HIYoung]`,
+  introduction: `인공지능과 전자기기에 관심이 많은 학생입니다.ㅎㅎ`,
   siteUrl: `https://gatsby-starter-bee.netlify.com`, // Your blog site url
   social: {
     twitter: ``, // Your Twitter account
@@ -10,7 +10,7 @@ module.exports = {
     medium: ``, // Your Medium account
     facebook: ``, // Your Facebook account
     linkedin: ``, // Your LinkedIn account
-    instagram: ``, // Your Instagram account
+    instagram: `hayeong015`, // Your Instagram account
   },
   icon: `content/assets/felog.png`, // Add your favicon
   keywords: [`blog`],
