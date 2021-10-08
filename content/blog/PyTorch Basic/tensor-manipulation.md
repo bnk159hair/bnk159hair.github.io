@@ -703,7 +703,9 @@ draft: false
 
     현재 위 텐서의 크기는 (2, 2, 3)이다. 
 
-    ![Untitled](%E1%84%91%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%90%E1%85%A9%E1%84%8E%E1%85%B5%20%E1%84%80%E1%85%B5%E1%84%8E%E1%85%A9(PyTorch%20Basic)%20f0d1106b77114c90a0692f7afd43b555/Untitled%205.png)
+    <p align="center">
+            <img src="assets\2021-10-09\0.png"/>
+        </p>
 
     **5-1) 3차원 텐서에서 2차원 텐서로 변경**
 
@@ -727,7 +729,9 @@ draft: false
 
     다시 말해 현재 3차원 텐서를 2차원 텐서로 변경하되 (?, 3)의 크기로 변경하라는 의미이다. 위의 예시에서는 (4, 3)의 크기를 가지는 텐서를 얻었다.
 
-    ![Untitled](%E1%84%91%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%90%E1%85%A9%E1%84%8E%E1%85%B5%20%E1%84%80%E1%85%B5%E1%84%8E%E1%85%A9(PyTorch%20Basic)%20f0d1106b77114c90a0692f7afd43b555/Untitled%206.png)
+    <p align="center">
+            <img src="assets\2021-10-09\1.png"/>
+        </p>
 
     내부적으로 크기 변환은 (2, 2, 3) → (2 x 2, 3) → (4, 3)으로 이루어졌다.
 
@@ -745,12 +749,16 @@ draft: false
 
     - **.shape 의 결과값은 가장 바깥 괄호에서부터 보는 것이 좋다.**
 
-    ![Untitled](%E1%84%91%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%90%E1%85%A9%E1%84%8E%E1%85%B5%20%E1%84%80%E1%85%B5%E1%84%8E%E1%85%A9(PyTorch%20Basic)%20f0d1106b77114c90a0692f7afd43b555/Untitled%207.png)
+    <p align="center">
+            <img src="assets\2021-10-09\2.png"/>
+        </p>
 
     - 위에서 보면 가장 바깥 괄호를 기준으로 원소의 개수는 4개, 그 다음은 1개 원소, 그 다음은 3개의 원소로 구성되어 있다.
     - 아래 예시를 보면 가장 바깥 괄호를 기준으로 3개의 원소, 그 다음 괄호 기준으로 원소의 개수는 1로 구성 되어있다.
 
-        ![Untitled](%E1%84%91%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%90%E1%85%A9%E1%84%8E%E1%85%B5%20%E1%84%80%E1%85%B5%E1%84%8E%E1%85%A9(PyTorch%20Basic)%20f0d1106b77114c90a0692f7afd43b555/Untitled%208.png)
+        <p align="center">
+            <img src="assets\2021-10-09\3.png"/>
+        </p>
 
     - **.shape의 결과 값을 굳이 (차원, 행, 열) 등과 같은 양식으로 볼 필요 없다는 것이다.**
 
@@ -801,7 +809,7 @@ draft: false
 
     위의 결과는 1이었던 두번째 차원이 제거 되면서 (3,)의 크기를 가지는 텐서로 변경되어 1차원 벡터가 된 것을 보여준다.
 
-    7**) 언스퀴즈(Unsqueeze) - 특정 위치에 1인 차원을 추가한다.**
+    **7) 언스퀴즈(Unsqueeze) - 특정 위치에 1인 차원을 추가한다.**
 
     언스퀴즈는 스퀴즈와 정반대의 기능을 한다. 특정 위치에 1인 차원을 추가할 수 있다. 
 
@@ -869,3 +877,55 @@ draft: false
     ```
 
     - **view(), squeeze(), unsqueeze()는 텐서의 원소 수를 그대로 유지하면서 모양과 차원을 조절한다.**
+    
+    **8) 타입 캐스팅(Type Casting)**
+
+    <p align="center">
+            <img src="assets\2021-10-09\4.png"/>
+        </p>
+
+    텐서에는 자료형이 존재하며 각 데이터형별로 정의되어 있다.
+
+    예를 들어 32비트의 부동 소수점은 torch.FloatTensor를 사용하며 GPU 연산을 위한 torch.cuda.FloatTensor 자료형도 있다. 
+
+    그리고 **이 자료형을 변환하는 것을 타입 캐스팅**이라고 한다.
+
+    실습을 위해 long 타입의 lt라는 텐서를 선언한다.
+
+    ```python
+    lt = torch.LongTensor([1, 2, 3, 4])
+    print(lt)
+    ```
+
+    텐서에 .float()을 붙이면 바로 float형으로 타입이 변경된다.
+
+    ```python
+    print(lt.float())
+    ```
+
+    ```python
+    tensor([1., 2., 3., 4.])
+    ```
+
+    이번에는 Byte 타입의 bt라는 텐서를 만들어보겠다.
+
+    ```python
+    bt = torch.ByteTensor([True, False, False, True])
+    print(bt)
+    ```
+
+    ```python
+    tensor([1, 0, 0, 1], dtype=torch.uint8)
+    ```
+
+    여기에 .long()이라고 하면 long 타입의 텐서로 변경되고 .float()이라고 하면 float 타입의 텐서로 변경된다.
+
+    ```python
+    print(bt.long())
+    print(bt.float())
+    ```
+
+    ```python
+    tensor([1, 0, 0, 1])
+    tensor([1., 0., 0., 1.])
+    ```
