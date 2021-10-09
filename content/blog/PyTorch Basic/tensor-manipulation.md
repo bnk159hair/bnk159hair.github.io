@@ -929,3 +929,131 @@ draft: false
     tensor([1, 0, 0, 1])
     tensor([1., 0., 0., 1.])
     ```
+    **9) 연결하기(Concatenate)**
+
+    이번에는 두 텐서를 연결하는 방법에 대해 알아보자.
+
+    ```python
+    x = torch.FloatTensor([[1, 2], [3, 4]])
+    y = torch.FloatTensor([[5, 6], [7, 8]])
+    ```
+
+    위의 (2 x 2) 크기의 두 텐서를 torch.cat([ ])를 통해 연결할 때에 연결 방법은 한 가지만 있는 것이 아니다. torch.cat은 어느 차원을 늘릴 것인지를 인자로 줄 수 있다. 예를 들어 dim=0은 첫번째 차원을 늘리라는 의미를 담고 있다.
+
+    ```python
+    print(torch.cat([x, y], dim=0))
+    ```
+
+    ```python
+    tensor([[1., 2.],
+            [3., 4.],
+            [5., 6.],
+            [7., 8.]])
+    ```
+
+    dim=0을 인자로 했을 때에 두 개의 (2 x 2) 텐서가 (4 x 2) 텐서가 된 것을 볼 수 있다. 
+
+    ```python
+    print(torch.cat([x, y], dim=1))
+    ```
+
+    ```python
+    tensor([[1., 2., 5., 6.],
+            [3., 4., 7., 8.]])
+    ```
+
+    dim=1을 인자로 했더니 두 개의 (2 x 2) 텐서가 (2 x 4) 텐서가 된 것을 볼 수 있다.
+
+    - 딥러닝엥서는 줄 **모델의 입력 또는 중간 연산에서 두 개의 텐서를 연결하는 경우가 많다.** 두 텐서를 연결해서 입력으로 사용하는 것은 **두 가지의 정보를 모두 사용한다는 의미**를 가지고 있다.
+
+    **10) 스택킹(Stacking)**
+
+    연결(concatenate)을 하는 또 다른 방법으로는 **스택킹(stacking)**이 있다. 스택킹은 영어로 쌓는다는 의미이며, **많은 연산을 포함**하기에 연결보다 편리할 때가 많다.
+
+    ```python
+    x = torch.FloatTensor([1, 4])
+    y = torch.FloatTensor([2, 5])
+    z = torch.FloatTensor([3, 6])
+    ```
+
+    ```python
+    print(torch.stack([x, y, z]))
+    ```
+
+    ```python
+    tensor([[1., 4.],
+            [2., 5.],
+            [3., 6.]])
+    ```
+
+    위 결과는 3개의 벡터가 순차적으로 쌓여 (3 x 2) 텐서가 된 것을 보여준다.
+
+    ![Untitled](%E1%84%91%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%90%E1%85%A9%E1%84%8E%E1%85%B5%20%E1%84%80%E1%85%B5%E1%84%8E%E1%85%A9(PyTorch%20Basic)%20f0d1106b77114c90a0692f7afd43b555/Untitled%2010.png)
+
+    스택킹은 많은 연산을 한번에 축약한다. 예를 들어 위 작업은 아래의 코드와 동일한 작업이다.
+
+    ```python
+    print(torch.cat([x.unsqueeze(0), y.unsqueeze(0), z.unsqueeze(0)], dim=0))
+    ```
+
+    x, y, z는 기존에는 전부 (2,)의 크기를 가지지만 .unsqueeze(0)을 함으로써 3개의 벡터는 전부 (1, 2)의 크기의 2차원 텐서로 변경된다. 
+
+    여기에 연결(concatenate)를 의미하는 cat을 사용하면 (3 x 2) 텐서가 된다.
+
+    ```python
+    tensor([[1., 4.],
+            [2., 5.],
+            [3., 6.]])
+    ```
+
+    위에서는 torch.stack([x,y,z])라는 하나의 명령어로 수행했지만, 연결(concatenate)로 이를 구현하려고 하면 꽤 복잡해진다.
+
+    스택킹에 추가적으로 dim을 인자로 줄 수도 있다. 
+    dim=1을 인자로 줄경우에는 두번쨰 차원이 증가하도록 쌓으라는 의미이다.
+
+    ```python
+    print(torch.stack([x, y, z], dim=1))
+    ```
+
+    ```python
+    tensor([[1., 2., 3.],
+            [4., 5., 6.]])
+    ```
+
+    결과적으로 (2 x 3) 텐서가 된다.
+
+    ![Untitled](%E1%84%91%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%90%E1%85%A9%E1%84%8E%E1%85%B5%20%E1%84%80%E1%85%B5%E1%84%8E%E1%85%A9(PyTorch%20Basic)%20f0d1106b77114c90a0692f7afd43b555/Untitled%2011.png)
+
+    **11) ones_like와 zeros_lize - 0으로 채워진 텐서와 1로 채워진 텐서**
+
+    ```python
+    x = torch.FloatTensor([[0, 1, 2], [2, 1, 0]])
+    print(x)
+    ```
+
+    ```python
+    tensor([[0., 1., 2.],
+            [2., 1., 0.]])
+    ```
+
+    위 텐서에 ones_lize를 하면 동일한 크기(shape)지만 1로만 값이 채워진 텐서를 생성한다.
+
+    ```python
+    print(torch.ones_like(x)) # 입력 텐서와 크기를 동일하게 하면서 값을 1로 채우기
+    ```
+
+    ```python
+    tensor([[1., 1., 1.],
+            [1., 1., 1.]])
+    ```
+
+    위 텐서에 zeros_lize를 하면 동일한 크기(shape)지만 0으로만 값이 채워진 텐서를 생성한다.
+
+    ```python
+    print(torch.zeros_like(x)) # 입력 텐서와 크기를 동일하게 하면서 값을 0으로 채우기
+    ```
+
+    ```python
+    tensor([[0., 0., 0.],
+            [0., 0., 0.]])
+    ```
