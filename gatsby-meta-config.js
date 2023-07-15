@@ -14,8 +14,8 @@ module.exports = {
     name: `김하영`,
     bio: {
       role: `백엔드 개발자`,
-      description: ['사람에 가치를 두는', '능동적으로 일하는', '이로운 것을 만드는'],
-      thumbnail: 'sample.png', // Path to the image in the 'asset' folder
+      description: ['자동차를 사랑하는', 'IT기기 덕후인', '협업을 중시하는'],
+      thumbnail: 'Hiyoung.jpg', // Path to the image in the 'asset' folder
     },
     social: {
       github: `https://github.com/bnk159hair`, // `https://github.com/zoomKoding`,
@@ -43,13 +43,14 @@ module.exports = {
       // ========================================================
       // ========================================================
       {
-        date: '2021.02 ~',
-        activity: '개인 블로그 개발 및 운영',
-        links: {
-          post: '/gatsby-starter-zoomkoding-introduction',
-          github: 'https://github.com/zoomkoding/zoomkoding-gatsby-blog',
-          demo: 'https://www.zoomkoding.com',
-        },
+        date: '2017.03 ~ 2023.02',
+        activity: '컴퓨터정보공학 전공',
+        links: {},
+      },
+      {
+        date: '2023.01 ~',
+        activity: 'SSAFY(삼성청년SW아카데미) 9기',
+        links: {},
       },
     ],
 
