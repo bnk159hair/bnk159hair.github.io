@@ -1,132 +1,79 @@
 ---
 emoji: 🔮
-title: Gatsby 테마로 GitHub Blog 만들기
-date: '2021-07-06 00:00:00'
-author: 줌코딩
-tags: 블로그 github-pages gatsby
-categories: 블로그 featured
+title: 백준 2206, 벽 부수고 이동하기
+date: '2023-07-15 00:00:00'
+author: 하이영
+tags: 알고리즘 백준
+categories: 알고리즘
 ---
 
-제 블로그의 테마나 Gatsby의 다른 테마를 활용해서 Github Blog를 만들고 싶은 분들이 계실텐데요! 이런 분들에게 도움을 드리고자 이 글을 쓰게 되었습니다. 잘 안되는 부분이나 궁금한 점을 댓글로 남겨주면 확인해보고 답변 드리도록 하겠습니다!
+# 문제 푸는데 필요한 정보
 
-## 1. Repository 생성하기
+- N X M 행렬로 표현되는 맵이 주어짐
+  - 0은 이동할 수 있는 곳, 1은 이동할 수 없는 곳
+- (1, 1)에서 (N, M)의 위치까지 최단 경로로 이동해야함
+  - 최단 경로는 맵에서 가장 적은 개수의 칸을 지나는 경로를 말함
+  - 이 때 시작하는 칸과 끝나는 칸도 포함해서 세야함
+- 이동 도중 벽을 부수고 이동하는 것이 좀 더 경로가 짧아진다면, 한 개까지 부수고 이동해도 됌
+- 한 칸에서 이동할 수 있는 칸은 상하좌우로 인접한 칸
 
-GitHub Blog를 만들려면 Github에 Repository를 생성해야 합니다.
+# 문제 푸는데 필요한 알고리즘
 
-![github-blog.png](github-blog.png)
+- 전체적인 풀이법은 BFS를 통한 최단 경로를 구해내는 것과 유사하다.
+- 하지만 이동 도중 벽을 한번 부술 수 있다는 것이 차이점
+- 방문 처리의 경우에도 단순한 2차원 배열로는 불가능하다
+  - 한 지역이라도 벽을 부수고 온 경우와 벽을 부수지 않고 온 경우가 존재하기 때문
+  - 따라서 3차원 배열로 구현 ( 1일 때는 아직 부수지 않음, 0일 때는 이미 부수고 옴)
+- 현재 위치에서 이동할 수 있는 경우의 수는 총 3가지이다.
+  1. 벽을 부수지 않았으며 이동하려는 위치가 벽이며 방문처리가 안 된 경우
+  2. 벽을 부수지 않았으며 이동하려는 위치가 벽이 아니며 방문처리가 안 된 경우
+  3. 벽을 이미 부쉈으며 이동하려는 위치가 벽이 아니며 방분처리가 안 된 경우
+- 위의 경우에 대해 방문 처리를 진행하며 BFS를 돌리면 문제가 해결 된다.
 
-GitHub에 로그인 한 뒤에 우측 상단에 있는 New Repository 버튼을 클릭하면 repository 생성 페이지로 이동하게 됩니다. 이 때 Import a repository 버튼을 클릭합니다.
+# 실수한 내용 및 고찰
 
-![github-blog-1.png](github-blog-1.png)
+- 1, 2번에 대해 방문처리 코드를 작성하지 않았다가 메모리 초과 오류가 발생했다.
+- 1년 전에 풀었던 문제지만 사소하게나마 메모리와 시간이 개선되었다.
 
-아래 페이지에 도달하시면 두 가지 정보를 넣어주셔야 하는데, Your old repository's clone URL에는 사용하고자 하는 gatsby 테마가 있는 repository의 주소를 넣어주시면 됩니다.
+# 코드
 
-제 블로그 테마를 쓰고 싶으신 분들은 여기에 [https://github.com/zoomKoding/zoomkoding.com](https://github.com/zoomKoding/zoomkoding.com)를 넣어주세요!
+```python
+input = sys.stdin.readline
 
-![github-blog-2.png](github-blog-2.png)
+N, M = map(int, input().split())
+Map = [list(map(int, input()[:-1])) for _ in range(N)]
+queue = deque()
+visited = [[[False for _ in range(2)] for _ in range(M)] for _ in range(N)]
+queue.append((0, 0, 1, 1))
+visited[0][0][1] = True
+visited[0][0][0] = True
+dx = [-1, 0, 1, 0]
+dy = [0, -1, 0, 1]
+while queue:
+    x, y, depth, cnt = queue.popleft()
+    if x == N-1 and y == M-1:
+        print(depth)
+        exit()
+    for i in range(4):
+        new_x = x + dx[i]
+        new_y = y + dy[i]
+        if new_x < 0 or new_x >= N or new_y < 0 or new_y >= M:
+            continue
+        if cnt > 0:
+            if Map[new_x][new_y] > 0 and not visited[new_x][new_y][0]:
+                visited[new_x][new_y][0] = True
+                queue.append((new_x, new_y, depth+1, 0))
+            if not Map[new_x][new_y] > 0 and not visited[new_x][new_y][1]:
+                visited[new_x][new_y][1] = True
+                queue.append((new_x, new_y, depth+1, 1))
+        else:
+            if Map[new_x][new_y] > 0 or visited[new_x][new_y][1] or visited[new_x][new_y][0]:
+                continue
+            queue.append((new_x, new_y, depth+1, 0))
+            visited[new_x][new_y][0] = True
 
-그럼 이제 Repository Name을 입력해줍니다. 이 때 주의할 점은 Repository명은 꼭 [GitHubID].github.io로 설정하셔야 합니다.
-
-그리고 Begin Import 버튼을 클릭하고 조금 기다리면 선택하신 블로그 테마를 import한 Repository가 생성되게 됩니다.
-
-![github-blog-3.png](github-blog-3.png)
-
-## 2. Repository 가져오기
-
-이제 실제로 수정하고 배포할 수도록 내 컴퓨터(local)에 Repsitory를 가져와볼 건데요! 먼저 Repository에서 아래와 같이 초록색 Code 버튼을 클릭하면 링크가 나오게 되는데, 이 링크를 복사합니다.
-
-![github-blog-4.png](github-blog-4.png)
-
-그리고 아래 명령어를 수행하여 블로그를 다운로드합니다.
-
-```bash
-cd [Repository를 저장할 폴더]
-git clone [복사한 주소]
+print(-1)
 ```
-
-## 3. Blog 설치하기
-
-이제 블로그를 동작시킬 수 있도록 패키지들을 다운로드 해야하는데, 다음 명령어를 실행하시면 받을 수 있습니다.
-
-```bash
-cd [Repository 주소]
-npm install
-```
-
-## 4. Blog 배포 준비하기
-
-그리고 이제 Gatsby 테마를 GitHub 페이지에 올리기 위해 gh-pages라는 패키지를 설치해야 합니다. 설치는 다음 명령어를 실행하시면 됩니다.
-
-```bash
-npm install gh-pages --save-dev
-```
-
-그리고 나서 package.json에 다음을 추가합니다.
-
-```json
-{
-  "scripts": {
-    "deploy": "gatsby build && gh-pages -d public" // 추가
-  }
-}
-```
-
-## 5. Blog 배포하기
-
-드디어 배포 준비는 다 끝났습니다. 이제 다음 명령을 실행하시면 github page에 배포하실 수 있습니다.
-
-```bash
-npm run deploy
-```
-
-조금 기다리신 후에 다음과 같이 `Published`라는 메시지를 받으셨다면 배포는 잘 끝났습니다!
-
-> 🙋‍♂️ 제 블로그 템플릿을 사용하시는 분들을 `node 버전이 14 이상`이어야 합니다.
-> node -v를 통해 node 버전을 확인하신 후 낮은 버전이라면 업그레이드를 진행해주세요!
-
-> 💡 혹시 그 외에 다른 에러가 발생하신다면 아래에 댓글로 에러 내용을 알려주세요!
-
-![github-blog-5.png](github-blog-5.png)
-
-## 6. Repository Source Branch 변경하기
-
-마지막으로 GitHub 페이지가 작동하려면 GitHub의 Repository 설정에서 배포 할 Branch를 선택해야 합니다. 이를 위해서 Repository에 있는 Settings를 클릭하고 죄측 메뉴에서 Pages를 클릭하여 Github Pages 설정 페이지로 이동합니다.
-
-![github-blog-6.png](github-blog-6.png)
-
-여기서 Source에 있는 Branch를 master(main)에서 gh-pages로 변경한 후에 저장합니다.
-
-![github-blog-7.png](github-blog-7.png)
-
-## 7. 배포된 페이지 확인하기
-
-이제 실제로 잘 배포가 되었는지 확인해봅시다. 여태까지 문제가 없으셨다면 [GitHubID].github.io에 접근했을 때 블로그가 잘 보이는 것을 확인하실 수 있으실 겁니다.
-
-![github-blog-8.png](github-blog-8.png)
-
-## 8. 수정하고 배포하기
-
-블로그를 수정하시는 방법은 각 블로그 테마마다 다를텐데요. 그에 맞춰서 변동사항을 commit하신 후에 아래 명령어를 실행하시면 변동사항이 블로그에 배포됩니다!
-
-```bash
-npm run deploy
-```
-
-<br/>
-
-## ⭐️ 이 블로그 테마를 이용하고 싶으시다면!
-
-마지막으로 제 블로그 테마를 활용하고 싶으시다면 아래 링크를 참고해주세요!
-[https://www.zoomkoding.com/gatsby-starter-zoomkoding-introduction](https://www.zoomkoding.com/gatsby-starter-zoomkoding-introduction)
-
-궁금하신 점이 있으시다면 [이슈](https://github.com/zoomKoding/zoomkoding-gatsby-blog/issues/new)로 남겨주시면 최대한 빠르게 답변 드리도록 하겠습니다!🙋‍♂️
-
-> 🤔 혹시 특정 기능이 없어서 테마 사용을 망설이시거나 제안하고 싶으신 기능이 있으시다면,  
-> 👉 [여기](https://github.com/zoomKoding/zoomkoding-gatsby-blog/issues/40)에 댓글 남겨주세요! 적극적으로 반영하겠습니다 :)
-
-<br/>
-
-**위 과정을 따라하시면서 궁금하신 점이 있다면 아래 `댓글`로 남겨주세요!👇**
 
 ```toc
 
