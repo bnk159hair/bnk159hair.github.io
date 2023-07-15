@@ -45,12 +45,10 @@ module.exports = {
       {
         date: '2017.03 ~ 2023.02',
         activity: '컴퓨터정보공학 전공',
-        links: {},
       },
       {
         date: '2023.01 ~',
         activity: 'SSAFY(삼성청년SW아카데미) 9기',
-        links: {},
       },
     ],
 
