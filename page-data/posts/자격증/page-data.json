@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-templates-category-template-js",
+    "path": "/posts/자격증",
+    "result": {"pageContext":{"currentCategory":"자격증","categories":["All","자격증","알고리즘","블로그","featured"],"edges":[{"node":{"id":"a454c4dc-13d4-5ba0-9dd4-90c10421e4f5","excerpt":"정보처리기사 실기 족보 1탄 공부 살충제 패러독스 : 동일한 테스트 케이스에 의한 반복적 테스트는 새로운 버그를 찾지 못한다는 테스트의 원리 데이터 마이닝 : 대규모로 저장된 데이터 안에서 체계적이고 자동적으로 통계적 규칙이나 패턴을 찾아내는 기술 프로토콜의 3요소 : 구문(Syntax) - 시스템 간의 정보 전송을 위한 데이터 형식, 코딩, 신호 레벨 등을 규정 의미(Semantic) - 시스템 간의 정보 전송을 위한 제어 정보로 조정과 에러 처리를 위한 규정 타이밍(Timing) - 시스템 간의 정보 전송을 위한 속도 조절과 순서 관리 규정 (프로토콜은 복수의 컴퓨터 사이에서 데이터 통신을 원활하게 하기 위해 필요한 통신규약입니다. 대표적으로 흔히 사용되는 IP/TCP가 있습니다.) XML : 송.수신 시스템 간 데이터 연계의 필요성을 위해서 전송되는 데이터 구조를 동일한 형태로 정의 JSON : 비동기 브라우저 . 서버 통신(AJAX)을 위해 ‘속성-값 쌍’, ‘키-값 쌍’으…","fields":{"slug":"/certificate/Engineer-Information_Processing/"},"frontmatter":{"categories":"자격증","title":"정보처리기사 실기 족보 1탄 공부","date":"July 16, 2023"}},"next":{"fields":{"slug":"/Algorithm/BackJoon/01.2206/"}},"previous":null}]}},
+    "staticQueryHashes": ["1073350324","1956554647","2938748437"]}
