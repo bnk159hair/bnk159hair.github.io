@@ -14,7 +14,7 @@ module.exports = {
     name: `김하영`,
     bio: {
       role: `백엔드 개발자`,
-      description: ['자동차를 사랑하는', 'IT기기 덕후인', '협업을 중시하는'],
+      description: ['계속해서 성장하는', '빠르게 배울 수 있는', '협업을 중시하는'],
       thumbnail: 'Hiyoung.jpg', // Path to the image in the 'asset' folder
     },
     social: {
