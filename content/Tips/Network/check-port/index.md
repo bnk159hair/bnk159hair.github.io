@@ -11,8 +11,4 @@ categories: 개발정보
 포트번호 관련 이슈들이 있었는데 해당 사이트를 통해
 손쉽게 포트번호가 열려있는지 확인할 수 있다.
 
-https://www.yougetsignal.com/tools/open-ports/
-
-```toc
-
-```
+[포트번호가 열려있는지 확인할 수 있는 사이트](https://www.yougetsignal.com/tools/open-ports/)
