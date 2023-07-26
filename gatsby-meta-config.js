@@ -85,18 +85,19 @@ module.exports = {
           github: 'https://github.com/zoomkoding/zoomkoding-gatsby-blog',
           demo: 'https://www.zoomkoding.com',
         },
-        {
-          title: 'JourneyJoy - 여행 계획 작성 서비스',
-          description: '국내 관광지 공공데이터를 기반으로 원하는 지역의 여행지를 조회할 수 있으며 여행지를 선택하여 플랜(여행 계획)을 작성하고 플랜에 대한 리뷰를 사람들과 공유할 수 있는 서비스를 개발하였습니다. 해당 프로젝트에서 데이터베이스 스키마 설계와 카카오맵 API 연동, 플랜 CRUD, 리뷰 CRUD의 기능 구현을 맡았습니다.',
-          techStack: ['SpringBoot', 'Vue.js', 'MySQL'],
-          thumbnailUrl: '',
-          links: {
-            post: '',
-            github: '',
-            googlePlay: '',
-            appStore: '',
-            demo: '',
-          },
+      },
+      {
+        title: 'JourneyJoy - 여행 계획 작성 서비스',
+        description:
+          '국내 관광지 공공데이터를 기반으로 원하는 지역의 여행지를 조회할 수 있으며 여행지를 선택하여 플랜(여행 계획)을 작성하고 플랜에 대한 리뷰를 사람들과 공유할 수 있는 서비스를 개발하였습니다. 해당 프로젝트에서 데이터베이스 스키마 설계와 카카오맵 API 연동, 플랜 CRUD, 리뷰 CRUD의 기능 구현을 맡았습니다.',
+        techStack: ['SpringBoot', 'Vue.js', 'MySQL'],
+        thumbnailUrl: '',
+        links: {
+          post: '',
+          github: '',
+          googlePlay: '',
+          appStore: '',
+          demo: '',
         },
       },
     ],
