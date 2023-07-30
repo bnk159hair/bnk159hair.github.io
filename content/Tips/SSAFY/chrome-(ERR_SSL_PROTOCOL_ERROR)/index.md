@@ -25,3 +25,5 @@ chrome://net-internals/#hsts
 
 그리고 본인의 도메인을 입력
 ![입력화면](01.png)
+
+[출처](https://velog.io/@lluna/deploy-chrome)
