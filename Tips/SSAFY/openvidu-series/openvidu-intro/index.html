@@ -115,7 +115,8 @@
         decoding="async"
       />
     </span></p>
-<h2 id="signaling--server" style="position:relative;"><a href="#signaling--server" aria-label="signaling  server permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Signaling / Server</h2>
+<br/>
+<h3 id="signaling--server" style="position:relative;"><a href="#signaling--server" aria-label="signaling  server permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Signaling / Server</h3>
 <ul>
 <li>서로 다른 네트워크 환경에 있는 두 개의 peer간에 통신을 위해서는 서로 상대방의 정보(위치 및 포맷)을 먼저 파악할 필요가 있음</li>
 <li>RTCPeerConnection들이 적절하게 데이터를 교환할 수 있게 처리해주는 과정</li>
@@ -135,19 +136,27 @@
 <li>크게 SDP(Session Description Protocol)과 ICE(Interactive Connectivity Establishment) Candidate들을 주고받음</li>
 </ul>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">- SDP 형식에는 미디어를 전송하기 위한 설정값(해상도, 포맷, 코덱 등)이 포함되어 있다.
-- ICE는 peer간을 연결할 수 있게 하도록 최적 경로를 찾아주는 프레임워크이며, STUN/TURN 서버르 통해 찾아낸 주소를 Candidate라 한다.</code></pre></div>
-<h2 id="stunsession-traversal-utilities-for-nat-server" style="position:relative;"><a href="#stunsession-traversal-utilities-for-nat-server" aria-label="stunsession traversal utilities for nat server permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>STUN(Session Traversal Utilities for NAT) Server</h2>
+- ICE는 peer간을 연결할 수 있게 하도록 최적 경로를 찾아주는 프레임워크이며,
+STUN/TURN 서버르 통해 찾아낸 주소를 Candidate라 한다.</code></pre></div>
+<br/>
+<h3 id="stunsession-traversal-utilities-for-nat-server" style="position:relative;"><a href="#stunsession-traversal-utilities-for-nat-server" aria-label="stunsession traversal utilities for nat server permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>STUN(Session Traversal Utilities for NAT) Server</h3>
 <ul>
 <li>통상적인 네트워크에서 통신하기 위해서는 Public IP를 필요로 하며, NAT 환경(사설망)에 놓인 클라이언트는 자신의 Public IP를 알지 못한다.</li>
 <li>STUN 서버는 peer 자신의 Public IP를 알려주는 서버</li>
 </ul>
-<h2 id="turntraversal-using-relays-around-nat-server" style="position:relative;"><a href="#turntraversal-using-relays-around-nat-server" aria-label="turntraversal using relays around nat server permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>TURN(Traversal Using Relays around NAT) Server</h2>
+<br/>
+<br/>
+<br/>
+<h3 id="turntraversal-using-relays-around-nat-server" style="position:relative;"><a href="#turntraversal-using-relays-around-nat-server" aria-label="turntraversal using relays around nat server permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>TURN(Traversal Using Relays around NAT) Server</h3>
 <ul>
 <li>만약 두 peer가 같은 NAT환경(사설망)에 있거나, 보호 정책이 엄격한 NAT/Router, 방화벽 등의 이유로 P2P 통신이 실패되는 때도 있는데, 이러한 상황에서 사용되는 것이 TURN 서버이다.</li>
 <li>TURN 서버는 Public 망에 존재하므로 각 peer들이 접속할 수 있으며, 각 peer들은 P2P 통신을 하는 것이 아닌 TURN 서버(릴레이 서버 역할)를 경유하여 통신하게 된다.</li>
 <li>아무래도 직접 통신하지 않고 TURN 서버가 모든 트래픽을 중계하며 통신하기 때문에 오버헤드와 지연이 발생할 수 있어 어쩔 수 없는 경우에만 사용</li>
 </ul>
 <p><a href="https://velog.io/@yyong3519/WebRTC-%EA%B0%9C%EB%85%90#webrtc-%EC%9A%A9%EC%96%B4-%EC%A0%95%EB%A6%AC">더욱 자세하게 설명되어있는 글입니다.</a></p>
+<br/>
+<br/>
+<br/>
 <h2 id="openvidu란" style="position:relative;"><a href="#openvidu%EB%9E%80" aria-label="openvidu란 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Openvidu란</h2>
 <ul>
 <li>웹 또는 모바일 애플리케이션에서 화상 통화를 쉽게 추가할 수 있는 오픈소스 플랫폼,</li>
@@ -161,7 +170,10 @@
 <li>가장 큰 장점은 모든 하위 수준의 작업들을 추상화 시켜, WebRTC, ICE Candidates, KMS등의 까다로운 기술들을 몰라도 쉽게 사용할 수 있다는 점</li>
 <li>따라서 WebRTC 미디어 서버를 구현하는 데 소모되는 리소스를 절약해서 빠르게 실시간 통신을 추가할 수 있도록 도와주는 것이 큰 장점이다.</li>
 </ul>
-<h2 id="openvidu의-구조" style="position:relative;"><a href="#openvidu%EC%9D%98-%EA%B5%AC%EC%A1%B0" aria-label="openvidu의 구조 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Openvidu의 구조</h2>
+<br/>
+<br/>
+<br/>
+<h3 id="openvidu의-구조" style="position:relative;"><a href="#openvidu%EC%9D%98-%EA%B5%AC%EC%A1%B0" aria-label="openvidu의 구조 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Openvidu의 구조</h3>
 <p><span
       class="gatsby-resp-image-wrapper"
       style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 627px; "
@@ -208,7 +220,34 @@ openvidu의 대략적인 구조는 다음과 같습니다.</p>
 </ul>
 </li>
 </ul>
-<h2 id="openvidu의-기본-개념" style="position:relative;"><a href="#openvidu%EC%9D%98-%EA%B8%B0%EB%B3%B8-%EA%B0%9C%EB%85%90" aria-label="openvidu의 기본 개념 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Openvidu의 기본 개념</h2>
+<br/>
+<br/>
+<br/>
+<h3 id="openvidu의-기본-개념" style="position:relative;"><a href="#openvidu%EC%9D%98-%EA%B8%B0%EB%B3%B8-%EA%B0%9C%EB%85%90" aria-label="openvidu의 기본 개념 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Openvidu의 기본 개념</h3>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 638px; "
+    >
+      <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 85.55555555555556%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAARCAYAAADdRIy+AAAACXBIWXMAABJ0AAASdAHeZh94AAABnklEQVQ4y3WU167CQAxE+f9v4+XyQgeBKCGAIAm9+epYmtVmCZbMlrFn3ULLzOzz+dj1erXL5eKrlPP9fg96u90abVjhQFr8nM9nezwe9n6/7fV6BeVcFIVrWZbu2GSDLxyBkFd+yWq1ssFgYOPx2I7H40+7L0LSSdOQKirZxLh8FVRIGeWS8HGmZiI7nU4B5x4cO3D2wmuEgKQ3nU49veFwaP1+33a7nROheZ7bZDJxG/Ber2dZlnmEXynzijoulSi9JpwV31rKSgUARyKhAbxMBOyrqvIV/HA42Ha79T2R4ftFGAtE1A6BnPS63W7oMhg2sXw1hSKjz+fTZw4HNYc7lDut2LCXX62GvEj4Gm4GWZ0nVTAVXh3FRkOtaXDCuPiz2cxGo5Gt12s/E2EqRIXzfD73gZetGtTSBiEaCo6SEq+nnUWJVnb4KLoaoUjVuf1+b2VVWYrjvMlz73JMFP4cUuOiLMOnxuvxvKkMNEp1j7HGCKlNu922v07HZzDFIcw2Gx+nlDB0OXZg1haLhX+G1DHFWWnEcrn0BqWE//0pLR5dRThAAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="openvidu-구조"
+        title="openvidu-구조"
+        src="/static/d4f0be7b4b336aff8f4637a1749bd5d1/41be6/03.png"
+        srcset="/static/d4f0be7b4b336aff8f4637a1749bd5d1/e9ff0/03.png 180w,
+/static/d4f0be7b4b336aff8f4637a1749bd5d1/f21e7/03.png 360w,
+/static/d4f0be7b4b336aff8f4637a1749bd5d1/41be6/03.png 638w"
+        sizes="(max-width: 638px) 100vw, 638px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+    </span>
+<br/>
+<br/></p>
 <ul>
 <li>Session(세션)
 <ul>
@@ -235,35 +274,14 @@ openvidu의 대략적인 구조는 다음과 같습니다.</p>
 <li>Stream(스트림)
 <ul>
 <li>Stream은 세션으로 흐르는 미디어 스트림을 말함</li>
-<li>참가자는 Stream을 배포(publish) 수 있으며 같은 세션의 다른 참가자는 그것을 구독(subscribe)할 수 있음
-<br>
-<br></li>
+<li>참가자는 Stream을 배포(publish) 수 있으며 같은 세션의 다른 참가자는 그것을 구독(subscribe)할 수 있음</li>
 </ul>
 </li>
 </ul>
-<p><span
-      class="gatsby-resp-image-wrapper"
-      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 638px; "
-    >
-      <span
-    class="gatsby-resp-image-background-image"
-    style="padding-bottom: 85.55555555555556%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAARCAYAAADdRIy+AAAACXBIWXMAABJ0AAASdAHeZh94AAABnklEQVQ4y3WU167CQAxE+f9v4+XyQgeBKCGAIAm9+epYmtVmCZbMlrFn3ULLzOzz+dj1erXL5eKrlPP9fg96u90abVjhQFr8nM9nezwe9n6/7fV6BeVcFIVrWZbu2GSDLxyBkFd+yWq1ssFgYOPx2I7H40+7L0LSSdOQKirZxLh8FVRIGeWS8HGmZiI7nU4B5x4cO3D2wmuEgKQ3nU49veFwaP1+33a7nROheZ7bZDJxG/Ber2dZlnmEXynzijoulSi9JpwV31rKSgUARyKhAbxMBOyrqvIV/HA42Ha79T2R4ftFGAtE1A6BnPS63W7oMhg2sXw1hSKjz+fTZw4HNYc7lDut2LCXX62GvEj4Gm4GWZ0nVTAVXh3FRkOtaXDCuPiz2cxGo5Gt12s/E2EqRIXzfD73gZetGtTSBiEaCo6SEq+nnUWJVnb4KLoaoUjVuf1+b2VVWYrjvMlz73JMFP4cUuOiLMOnxuvxvKkMNEp1j7HGCKlNu922v07HZzDFIcw2Gx+nlDB0OXZg1haLhX+G1DHFWWnEcrn0BqWE//0pLR5dRThAAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
-  ></span>
-  <img
-        class="gatsby-resp-image-image"
-        alt="openvidu-구조"
-        title="openvidu-구조"
-        src="/static/d4f0be7b4b336aff8f4637a1749bd5d1/41be6/03.png"
-        srcset="/static/d4f0be7b4b336aff8f4637a1749bd5d1/e9ff0/03.png 180w,
-/static/d4f0be7b4b336aff8f4637a1749bd5d1/f21e7/03.png 360w,
-/static/d4f0be7b4b336aff8f4637a1749bd5d1/41be6/03.png 638w"
-        sizes="(max-width: 638px) 100vw, 638px"
-        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
-        loading="lazy"
-        decoding="async"
-      />
-    </span></p>
-<h2 id="openvidu-session의-흐름도" style="position:relative;"><a href="#openvidu-session%EC%9D%98-%ED%9D%90%EB%A6%84%EB%8F%84" aria-label="openvidu session의 흐름도 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Openvidu Session의 흐름도</h2>
+<br/>
+<br/>
+<br/>
+<h3 id="openvidu-session의-흐름도" style="position:relative;"><a href="#openvidu-session%EC%9D%98-%ED%9D%90%EB%A6%84%EB%8F%84" aria-label="openvidu session의 흐름도 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Openvidu Session의 흐름도</h3>
 <ol>
 <li>Application server에서 Session을 초기화 함</li>
 <li>Application server에서 Session에 대한 Connection을 생성함. 이 때 Connection은 Session에 참가자 수 만큼 생성해야함. 각각의 Session은 Session에 단일 접속하게 해주는 Token을 가짐</li>
@@ -271,23 +289,37 @@ openvidu의 대략적인 구조는 다음과 같습니다.</p>
 <li>각각의 Client는 openvidu-browser.js를 통해 Token으로 Session에 연결함. 이 과정이 성공하면 Session의 참가자로 간주</li>
 <li>Session이 한번 연결되면 참가자는 openvidu-browser.js를 통해 Stream을 publish할 수 있고 Session내의 모든 참여자는 이것을 subscribe 할 수 있음</li>
 </ol>
-<br>
 <p><a href="https://docs.openvidu.io/en/stable/developing-your-video-app/">이해가 안되시면 공식 문서를 참조해보시기 바랍니다.</a></p>
+<br/>
+<br/>
+<br/>
 <h2 id="reference" style="position:relative;"><a href="#reference" aria-label="reference permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Reference</h2>
 <p><a href="https://velog.io/@ohsg97/openVidu-tutorial-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0">openvidu 개념1</a><br>
 <a href="https://2jinishappy.tistory.com/335">openvidu 개념2</a><br>
 <a href="https://velog.io/@ohjinseo/ReactJS-EC2-OpenVidu-%ED%99%98%EA%B2%BD%EC%97%90%EC%84%9C-%ED%99%94%EC%83%81%ED%9A%8C%EC%9D%98-%EA%B5%AC%ED%98%84%ED%95%B4%EB%B3%B4%EA%B8%B0">openvidu 개념3</a></p>
 <div class="table-of-contents">
 <ul>
-<li><a href="#%EA%B0%9C%EC%9A%94">개요</a></li>
-<li><a href="#webrtcweb-real-time-communication%EB%9E%80">WebRTC(Web Real-Time Communication)란</a></li>
+<li>
+<p><a href="#%EA%B0%9C%EC%9A%94">개요</a></p>
+</li>
+<li>
+<p><a href="#webrtcweb-real-time-communication%EB%9E%80">WebRTC(Web Real-Time Communication)란</a></p>
+<ul>
 <li><a href="#signaling--server">Signaling / Server</a></li>
 <li><a href="#stunsession-traversal-utilities-for-nat-server">STUN(Session Traversal Utilities for NAT) Server</a></li>
 <li><a href="#turntraversal-using-relays-around-nat-server">TURN(Traversal Using Relays around NAT) Server</a></li>
-<li><a href="#openvidu%EB%9E%80">Openvidu란</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#openvidu%EB%9E%80">Openvidu란</a></p>
+<ul>
 <li><a href="#openvidu%EC%9D%98-%EA%B5%AC%EC%A1%B0">Openvidu의 구조</a></li>
 <li><a href="#openvidu%EC%9D%98-%EA%B8%B0%EB%B3%B8-%EA%B0%9C%EB%85%90">Openvidu의 기본 개념</a></li>
 <li><a href="#openvidu-session%EC%9D%98-%ED%9D%90%EB%A6%84%EB%8F%84">Openvidu Session의 흐름도</a></li>
-<li><a href="#reference">Reference</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#reference">Reference</a></p>
+</li>
 </ul>
 </div></div></div><div class="post-navigator"><div class="post-navigator-card-wrapper"><a class="post-card prev" href="/Tips/SSAFY/chrome-(ERR_SSL_PROTOCOL_ERROR)/"><div class="direction">이전 글</div><div class="title">chrome ERR_SSL_PROTOCOL_ERROR</div></a></div><div class="post-navigator-card-wrapper"></div></div></main><footer class="page-footer-wrapper"><p class="page-footer">© <!-- -->2023<!-- --> <a href="https://github.com/bnk159hair">김하영</a> powered by<a href="https://github.com/zoomKoding/zoomkoding-gatsby-blog"> zoomkoding-gatsby-blog</a></p></footer><div class="dark-mode-button-wrapper"><button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium dark-mode-button css-1yxmbwk" tabindex="0" type="button"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge dark-mode-icon css-6flbmm" focusable="false" viewBox="0 0 24 24" aria-hidden="true" data-testid="DarkModeIcon"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"></path></svg></button></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/Tips/SSAFY/openvidu-series/openvidu-intro/";window.___webpackCompilationHash="ec52e3699920381409a3";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-9b356b5dc44213e24f34.js"],"app":["/app-097c1470781c64d6179e.js"],"component---cache-caches-gatsby-plugin-offline-app-shell-js":["/component---cache-caches-gatsby-plugin-offline-app-shell-js-0b8a70f65d0cff4a7a25.js"],"component---src-pages-404-js":["/component---src-pages-404-js-bc51420b294b9123f97d.js"],"component---src-pages-about-js":["/component---src-pages-about-js-39e57401fb032eafb2fb.js"],"component---src-pages-index-js":["/component---src-pages-index-js-0a6bbda26eb501968935.js"],"component---src-templates-blog-template-js":["/component---src-templates-blog-template-js-e3a4bb3c9603d1ed8af7.js"],"component---src-templates-category-template-js":["/component---src-templates-category-template-js-a0af7e239c6cf28d9bb9.js"]};/*]]>*/</script><script src="/polyfill-9b356b5dc44213e24f34.js" nomodule=""></script><script src="/component---src-templates-blog-template-js-e3a4bb3c9603d1ed8af7.js" async=""></script><script src="/f9d3028dbef90a6e9b8db85387d63dd9f4edf538-07f7733d8d97d93498cb.js" async=""></script><script src="/app-097c1470781c64d6179e.js" async=""></script><script src="/framework-043f1197be387cb18d15.js" async=""></script><script src="/webpack-runtime-121beace0d37eb670f34.js" async=""></script></body></html>
