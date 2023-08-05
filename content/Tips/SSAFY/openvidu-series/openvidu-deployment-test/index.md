@@ -1,7 +1,7 @@
 ---
 emoji: 💻
-title: Openvidu Deployment 구축 후기 (미작성)
-date: '2023-07-25 00:00:00'
+title: Openvidu Deployment 구축 후기
+date: '2023-08-05 00:00:00'
 author: 하이영
 tags: EC2 아키텍처 openvidu docker
 categories: 개발공부
@@ -9,7 +9,7 @@ categories: 개발공부
 
 ## 개요
 
-SSAFY 2학기에 접어들면서 저 포함 6명의
+앞서 글에서 설명한 것처럼 SSAFY 2학기에 접어들면서 저 포함 6명의
 팀원이 함께 공통프로젝트를 진행하게 되었습니다.
 
 공통프로젝트는 WebRTC를 이용한 프로젝트를 진행하게 되는데 제 개인  

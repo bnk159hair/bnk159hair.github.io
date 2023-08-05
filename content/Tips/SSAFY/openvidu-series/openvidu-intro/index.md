@@ -14,6 +14,8 @@ SSAFY 2학기에 접어들면서 저 포함 6명의
 
 원래는 openvidu를 온프레미스로 구축한 경험글 하나로 퉁쳐서  
 작성하려 했는데 생각보다 내용이 많아서 따로 정리하게 됩니다.
+<br/>
+<br/>
 
 ## WebRTC(Web Real-Time Communication)란
 
@@ -32,6 +34,8 @@ SSAFY 2학기에 접어들면서 저 포함 6명의
 <br/>
 
 ### Signaling / Server
+
+<br/>
 
 - 서로 다른 네트워크 환경에 있는 두 개의 peer간에 통신을 위해서는 서로 상대방의 정보(위치 및 포맷)을 먼저 파악할 필요가 있음
 - RTCPeerConnection들이 적절하게 데이터를 교환할 수 있게 처리해주는 과정
@@ -54,13 +58,13 @@ STUN/TURN 서버르 통해 찾아낸 주소를 Candidate라 한다.
 ```
 
 <br/>
+<br/>
 
 ### STUN(Session Traversal Utilities for NAT) Server
 
 - 통상적인 네트워크에서 통신하기 위해서는 Public IP를 필요로 하며, NAT 환경(사설망)에 놓인 클라이언트는 자신의 Public IP를 알지 못한다.
 - STUN 서버는 peer 자신의 Public IP를 알려주는 서버
 
-<br/>
 <br/>
 <br/>
 
@@ -72,6 +76,7 @@ STUN/TURN 서버르 통해 찾아낸 주소를 Candidate라 한다.
 
 [더욱 자세하게 설명되어있는 글입니다.](https://velog.io/@yyong3519/WebRTC-%EA%B0%9C%EB%85%90#webrtc-%EC%9A%A9%EC%96%B4-%EC%A0%95%EB%A6%AC)
 
+<br/>
 <br/>
 <br/>
 <br/>
@@ -88,12 +93,12 @@ STUN/TURN 서버르 통해 찾아낸 주소를 Candidate라 한다.
 
 <br/>
 <br/>
-<br/>
 
 ### Openvidu의 구조
 
+<br/>
+
 ![openvidu-구조](02.png)
-<br>
 <br>
 openvidu의 대략적인 구조는 다음과 같습니다.
 
@@ -110,12 +115,12 @@ openvidu의 대략적인 구조는 다음과 같습니다.
 
 <br/>
 <br/>
-<br/>
 
 ### Openvidu의 기본 개념
 
-![openvidu-구조](03.png)
 <br/>
+
+![openvidu-구조](03.png)
 <br/>
 
 - Session(세션)
@@ -140,6 +145,11 @@ openvidu의 대략적인 구조는 다음과 같습니다.
 <br/>
 
 ### Openvidu Session의 흐름도
+
+<br/>
+
+![openvidu 흐름](04.png)
+<br/>
 
 1. Application server에서 Session을 초기화 함
 2. Application server에서 Session에 대한 Connection을 생성함. 이 때 Connection은 Session에 참가자 수 만큼 생성해야함. 각각의 Session은 Session에 단일 접속하게 해주는 Token을 가짐
