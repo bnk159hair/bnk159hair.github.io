@@ -14,7 +14,7 @@ SSAFY 2학기에 접어들면서 저 포함 6명의
 
 공통프로젝트는 WebRTC를 이용한 프로젝트를 진행하게 되는데 제 개인  
 클라우드 서버(오라클)과 SSAFY에서 지급한 EC2(AWS)에 WebRTC를  
-간단하게 사용할 수 있게 해주는 openvidu를 구축해보면서  
+간편하게 사용할 수 있게 해주는 openvidu 서버를 구축해보면서  
 경험한 여러 삽질과 제가 이해한 내용에 대해 정리해보려 합니다.
 
 ## WebRTC(Web Real-Time Communication)란
@@ -56,13 +56,13 @@ SSAFY 2학기에 접어들면서 저 포함 6명의
 <br>
 openvidu의 대략적인 구조는 다음과 같습니다.
 
-- Openvidu Browser
-  - openvidu의 프론트엔드 구현체를 사용할 수 있는 부분입니다.
+- Application client
+  - 사용자와 직접 상호 작용하는 코드이며 openvidu의 프론트엔드 구현체를 사용할 수 있는 부분입니다.
 - Application server
-  - openvidu browser로부터 api 요청을 받아 처리해주고 deployment와 연결해주는 부분입니다.
+  - Application client로부터 api 요청을 받아 처리해주고 deployment와 연결해주는 부분입니다.
   - 본인이 작성한 백엔드 서버가 담당하는 부분입니다.
 - Openvidu deployment
-  - openvidu의 미디어 서버 역할을 하는 부분입니다.
+  - Kurento 미디어 서버, turn 서버 등 openvidu가 추상화한 기능들을 제공하는 구현체입니다.
 
 ## 단계
 
