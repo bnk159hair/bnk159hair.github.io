@@ -29,7 +29,9 @@ SSAFY 2학기에 접어들면서 저 포함 6명의
 
 ![WebRTC-구조](01.png)
 
-## Signaling / Server
+<br/>
+
+### Signaling / Server
 
 - 서로 다른 네트워크 환경에 있는 두 개의 peer간에 통신을 위해서는 서로 상대방의 정보(위치 및 포맷)을 먼저 파악할 필요가 있음
 - RTCPeerConnection들이 적절하게 데이터를 교환할 수 있게 처리해주는 과정
@@ -47,21 +49,32 @@ SSAFY 2학기에 접어들면서 저 포함 6명의
 
 ```
 - SDP 형식에는 미디어를 전송하기 위한 설정값(해상도, 포맷, 코덱 등)이 포함되어 있다.
-- ICE는 peer간을 연결할 수 있게 하도록 최적 경로를 찾아주는 프레임워크이며, STUN/TURN 서버르 통해 찾아낸 주소를 Candidate라 한다.
+- ICE는 peer간을 연결할 수 있게 하도록 최적 경로를 찾아주는 프레임워크이며,
+STUN/TURN 서버르 통해 찾아낸 주소를 Candidate라 한다.
 ```
 
-## STUN(Session Traversal Utilities for NAT) Server
+<br/>
+
+### STUN(Session Traversal Utilities for NAT) Server
 
 - 통상적인 네트워크에서 통신하기 위해서는 Public IP를 필요로 하며, NAT 환경(사설망)에 놓인 클라이언트는 자신의 Public IP를 알지 못한다.
 - STUN 서버는 peer 자신의 Public IP를 알려주는 서버
 
-## TURN(Traversal Using Relays around NAT) Server
+<br/>
+<br/>
+<br/>
+
+### TURN(Traversal Using Relays around NAT) Server
 
 - 만약 두 peer가 같은 NAT환경(사설망)에 있거나, 보호 정책이 엄격한 NAT/Router, 방화벽 등의 이유로 P2P 통신이 실패되는 때도 있는데, 이러한 상황에서 사용되는 것이 TURN 서버이다.
 - TURN 서버는 Public 망에 존재하므로 각 peer들이 접속할 수 있으며, 각 peer들은 P2P 통신을 하는 것이 아닌 TURN 서버(릴레이 서버 역할)를 경유하여 통신하게 된다.
 - 아무래도 직접 통신하지 않고 TURN 서버가 모든 트래픽을 중계하며 통신하기 때문에 오버헤드와 지연이 발생할 수 있어 어쩔 수 없는 경우에만 사용
 
 [더욱 자세하게 설명되어있는 글입니다.](https://velog.io/@yyong3519/WebRTC-%EA%B0%9C%EB%85%90#webrtc-%EC%9A%A9%EC%96%B4-%EC%A0%95%EB%A6%AC)
+
+<br/>
+<br/>
+<br/>
 
 ## Openvidu란
 
@@ -73,7 +86,11 @@ SSAFY 2학기에 접어들면서 저 포함 6명의
 - 가장 큰 장점은 모든 하위 수준의 작업들을 추상화 시켜, WebRTC, ICE Candidates, KMS등의 까다로운 기술들을 몰라도 쉽게 사용할 수 있다는 점
 - 따라서 WebRTC 미디어 서버를 구현하는 데 소모되는 리소스를 절약해서 빠르게 실시간 통신을 추가할 수 있도록 도와주는 것이 큰 장점이다.
 
-## Openvidu의 구조
+<br/>
+<br/>
+<br/>
+
+### Openvidu의 구조
 
 ![openvidu-구조](02.png)
 <br>
@@ -91,7 +108,15 @@ openvidu의 대략적인 구조는 다음과 같습니다.
   - 실시간 오디오 및 비디오 스트리밍에 필요한 모든 인프라를 제공함
   - 앞서 설명한 Kurento 미디어 서버, turn 서버 등 openvidu가 추상화한 기능들을 제공하는 구현체
 
-## Openvidu의 기본 개념
+<br/>
+<br/>
+<br/>
+
+### Openvidu의 기본 개념
+
+![openvidu-구조](03.png)
+<br/>
+<br/>
 
 - Session(세션)
   - 세션은 하나의 가상 공간 개념으로써 참여자들끼리는 서로 오디오와 비디오 스트림을 주고 받을 수 있음
@@ -109,12 +134,12 @@ openvidu의 대략적인 구조는 다음과 같습니다.
 - Stream(스트림)
   - Stream은 세션으로 흐르는 미디어 스트림을 말함
   - 참가자는 Stream을 배포(publish) 수 있으며 같은 세션의 다른 참가자는 그것을 구독(subscribe)할 수 있음
-    <br>
-    <br>
 
-![openvidu-구조](03.png)
+<br/>
+<br/>
+<br/>
 
-## Openvidu Session의 흐름도
+### Openvidu Session의 흐름도
 
 1. Application server에서 Session을 초기화 함
 2. Application server에서 Session에 대한 Connection을 생성함. 이 때 Connection은 Session에 참가자 수 만큼 생성해야함. 각각의 Session은 Session에 단일 접속하게 해주는 Token을 가짐
@@ -122,9 +147,11 @@ openvidu의 대략적인 구조는 다음과 같습니다.
 4. 각각의 Client는 openvidu-browser.js를 통해 Token으로 Session에 연결함. 이 과정이 성공하면 Session의 참가자로 간주
 5. Session이 한번 연결되면 참가자는 openvidu-browser.js를 통해 Stream을 publish할 수 있고 Session내의 모든 참여자는 이것을 subscribe 할 수 있음
 
-<br>
-
 [이해가 안되시면 공식 문서를 참조해보시기 바랍니다.](https://docs.openvidu.io/en/stable/developing-your-video-app/)
+
+<br/>
+<br/>
+<br/>
 
 ## Reference
 
