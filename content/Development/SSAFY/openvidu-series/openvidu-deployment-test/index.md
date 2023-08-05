@@ -17,6 +17,8 @@ categories: 개발공부
 간편하게 사용할 수 있게 해주는 openvidu 서버를 구축해보면서  
 경험한 여러 삽질과 제가 이해한 내용에 대해 정리해보려 합니다.
 
+[앞선 글](https://bnk159hair.github.io/Tips/SSAFY/openvidu-series/openvidu-intro/#webrtcweb-real-time-communication%EB%9E%80)을 읽고 이해하시면 아래 내용을 수행하는데 도움이 될거 같습니다.
+
 ## WebRTC(Web Real-Time Communication)란
 
 - 웹 브라우저가 서로 통신할 수 있도록 설계된 API
