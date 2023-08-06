@@ -4,7 +4,7 @@ title: Openvidu란?
 date: '2023-08-04 00:00:00'
 author: 하이영
 tags: 아키텍처 openvidu WebRTC
-categories: 개발공부
+categories: 개발공부 featured
 ---
 
 ## 개요
