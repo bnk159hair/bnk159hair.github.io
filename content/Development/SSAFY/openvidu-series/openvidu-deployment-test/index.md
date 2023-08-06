@@ -1,6 +1,6 @@
 ---
 emoji: 💻
-title: Openvidu Deployment 구축 후기
+title: Openvidu Deployment EC2 온프레미스 구축 후기
 date: '2023-08-05 00:00:00'
 author: 하이영
 tags: EC2 아키텍처 openvidu docker
@@ -19,90 +19,404 @@ categories: 개발공부
 
 [앞선 글](https://bnk159hair.github.io/Tips/SSAFY/openvidu-series/openvidu-intro/#webrtcweb-real-time-communication%EB%9E%80)을 읽고 이해하시면 아래 내용을 수행하는데 도움이 될거 같습니다.
 
-## WebRTC(Web Real-Time Communication)란
+<br/>
+<br/>
 
-- 웹 브라우저가 서로 통신할 수 있도록 설계된 API
-- 웹 브라우저 상에서는 어떠한 플러그인도 필요 없이 음성 채팅과 화상 채팅,
-  데이터 교환까지도 가능하게 하는 기술
-- WebRTC 기술은 **P2P(Peer-to-Peer)** 통신에 최적화
+## 목차
 
-## Signaling
+- 구축하고자 하는 환경 설명
+- 설치 전 주의할 점
+- 도커 설치
+- 포트 개봉
+- Deployment 설치
+- 파일 설정
+- 실행시키기
+- NGINX 설정 변경
 
-- RTCPeerConnection들이 적절하게 데이터를 교환할 수 있게 처리해주는 과정
-- 이를 수행하는 서버 = **시그널 서버**
-- 전이중 통신을 지원하는 **websocket**으로 이를 구현하는 것이 가장 적합
-- `세션제어메세지`, `네트워크 구성`, `미디어 기능` 정보 교환
-- 시그널링은 P2P 스트리밍 시작 전에 성공적으로 완료되어야 함
-  - **세션 제어 메세지** : 통신을 초기화하거나 닫고 오류를 보고
-  - **네트워크 구성** : 외부세계에 컴퓨터의 ip주소와 포트가 무엇인지 파악
-  - **미디어 기능** : 브라우저와 통신하려는 브라우저에서 처리할 수 있는 코덱과 해상도를 파악
+<br/>
+<br/>
 
-## 서버
+## 구축하고자 하는 환경 설명
 
-- 서버는 단지 웹 브라우저를 특정하기 위한 **시그널링 과정으로만 쓰임**
-- 시그널링을 마친 뒤 실제 데이터는 P2P 혹은 중개 서버를 통해 주고 받음
-- 서버에서는 websocket(TCP) 사용 (WebRTC는 UDP)
+openvidu를 통해 화상 기능을 제공하는 것이 저희 프로젝트의 가장 핵심 포인트였기에, 로컬에서 openvidu 도커 이미지를 돌리며 개발하는 것이 아닌 백엔드 팀원이 바로 실제 서버에 배포시키고, 프론트엔드는 해당 서버에 접속하며 개발을 할 수 있는 환경을 구축하고 싶었습니다.
 
-## Openvidu란
+대략적인 구상도를 그리면 아래와 같습니다.
 
-- 웹 또는 모바일 애플리케이션에서 화상 통화를 쉽게 추가할 수 있는 오픈소스 플랫폼
-- Kurento기반의 중개 서버를 애플리케이션에 쉽게 추가할 수 있도록 완전한 기술스택을 제공
-- Kurento : WebRTC 미디어 서버 역할을 함과 동시에 WebRTC 기술을 이용해 애플리케이션 개발을 돕는 클라이언트 API세트
-  - 그룹간의 통신, 녹음, 방송, 시청각 흐름의 라우팅 기술을 지원하고 있다.
-- WebRTC 미디어 서버를 구현하는 데 소모되는 리소스를 절약해서 빠르게 실시간 통신을 추가할 수 있도록 도와주는 것이 큰 장점이다.
+![구조도](00.png)
 
-## Openvidu의 구조 (미작성)
+## 설치 전 주의할 점
 
-![openvidu-구조](01.png)
-<br>
-<br>
-openvidu의 대략적인 구조는 다음과 같습니다.
+![포트 이미지](01.png)
 
-- Application client
-  - 사용자와 직접 상호 작용하는 코드이며 openvidu의 프론트엔드 구현체를 사용할 수 있는 부분입니다.
-- Application server
-  - Application client로부터 api 요청을 받아 처리해주고 deployment와 연결해주는 부분입니다.
-  - 본인이 작성한 백엔드 서버가 담당하는 부분입니다.
-- Openvidu deployment
-  - Kurento 미디어 서버, turn 서버 등 openvidu가 추상화한 기능들을 제공하는 구현체입니다.
+- openvidu가 사용하는 포트는 위와 같습니다. 그런데 다른 프로세스들이 해당 포트를 사용하고 있으면 openvidu는 정상적으로 작동하지 않습니다.
+- 그래서 가장 좋은건 다른 무엇보다 먼저 openvidu를 설치하는 것입니다.
+  저는 [해당글](https://velog.io/@kwak0568/OpenVidu-%EB%B0%B0%ED%8F%AC-Port%EC%99%80%EC%9D%98-%EC%A0%84%EC%9F%81)을 보고 서버를 받자마자 openvidu deployment를 설치했습니다.
+- openvidu deployment에 커스텀된 NGINX도 포함되니 가급적 openvidu deployment 먼저 설치하시는걸 추천합니다.
 
-## 단계
+## 도커 설치
 
-1. 클라우드 서버의 포트 열기
-2. 온프레미스 환경 구축에 대한 공식 문서와 똑같이 진행
-   - 도커 설치
-   - openvidu deployment 관련 파일 다운로드
-   - openvidu start를 통해 docker-compose 실행 -> 컨테이너들 실행
-3. 어플리케이션을 직접 커스텀한 부분으로 수정
+openvidu deployment를 설치하기 위해서는 도커가 설치되어 있어야 합니다.  
+가장 좋은건 [공식문서](https://docs.docker.com/engine/install/#server)를 보고 설치하는 것이지만 아래에도 적어 놓겠습니다. 서버의 OS가 Ubuntu 20.04이기에 아래 과정은 Ubuntu 20.04 기준입니다.
 
-- docker-compose.override.yml 파일을 수정해서 사용
+### 구버전 지우기
 
-## 원했던 환경
+EC2를 새로 발급받은 상태면 필요없을 수 있지만 혹시 모르니 진행합니다.  
+지워야할 패키지는 다음과 같습니다.
 
-제가 구축하고 싶었던 개발 환경은 프론트 팀원이 개발하면서 바로 테스트 할 수 있게  
-ec2에 자바 어플리케이션 서버와 openvidu deployment를 배포하는 것이었습니다.
+- docker.io
+- docker-compose
+- docker-doc
+- podman-docker
 
-## 해야할 것들
+```
+for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
+```
 
-기본으로 제공하는 코드의 포트 번호들은 따로 수정할 필요 없으며  
-openvidu docker-compose가 실행되면서 nginx등의 작업들도 모두 처리해줍니다.
-저는 이 부분을 잘못 이해해서 많은 시간을 소요했습니다.
+### apt repository를 통해 설치
 
-## 삽질한 부분
+설치 방법도 4가지 정도 있지만 제기준 가장 편한 apt repository를 통해 설치하겠습니다.
+
+#### repository 설정
+
+1. apt 패키지 인덱스를 업데이트 하고 https로 repository를 이용할 수 있게 apt에 패키지를 설치합니다.
+
+```
+sudo apt-get update
+sudo apt-get install ca-certificates curl gnupg
+```
+
+2. 도커의 official GPG key를 추가합니다.
+
+```
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+```
+
+3. 아래 명령어를 통해 repository를 설정합니다.
+
+```
+echo \
+  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+```
+
+4. apt 패키지 인덱스를 update 합니다.
+
+```
+sudo apt-get update
+```
+
+#### 도커 엔진 설치
+
+1. 아래 명령어를 통해 최신 버전의 도커 엔진, containerd, 도커 컴포즈를 설치합니다.
+
+```
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+2. 아래 명령어를 통해 도커 설치가 완료되었는지 확인합니다.
+
+```
+sudo docker run hello-world
+```
+
+![설치 완료](02.png)
+
+<br/>
+위와 같이 화면이 나온다면 성공적으로 완료된 것입니다.
+
+## 포트 개방
+
+```
+ufw allow ssh
+ufw allow 80/tcp
+ufw allow 443/tcp
+ufw allow 3478/tcp
+ufw allow 3478/udp
+ufw allow 40000:57000/tcp
+ufw allow 40000:57000/udp
+ufw allow 57001:65535/tcp
+ufw allow 57001:65535/udp
+ufw enable
+```
+
+포트 개방 전 ufw가 설치 되어있는지 확인하시기 바랍니다.(제가 받은 EC2는 설치 되어있었습니다.)
+
+## Deployment 설치
+
+1. /opt에 openvidu를 설치하는 것이 권장되기에 root 계정으로 전환합니다.
+
+```
+sudo su
+```
+
+2. 디렉토리 변경
+
+```
+cd /opt
+```
+
+3. openvidu deployment 다운로드
+
+```
+curl https://s3-eu-west-1.amazonaws.com/aws.openvidu.io/install_openvidu_latest.sh | bash
+```
+
+4. 성공적으로 openvidu 폴더가 다운로드 되면 아래와 같은 화면이 나옵니다.
+
+```
+=======================================
+Openvidu Platform successfully installed.
+=======================================
+
+1. Go to openvidu folder:
+$ cd openvidu
+
+2. Configure DOMAIN_OR_PUBLIC_IP and OPENVIDU_SECRET in .env file:
+$ nano .env
+
+3. Start OpenVidu
+$ ./openvidu start
+
+For more information, check:
+https://docs.openvidu.io/en/stable/deployment/ce/on-premises/
+```
+
+## 파일 설정
+
+```
+# OpenVidu configuration
+# ----------------------
+# Documentation: https://docs.openvidu.io/en/stable/reference-docs/openvidu-config/
+
+# NOTE: This file doesn't need to quote assignment values, like most shells do.
+# All values are stored as-is, even if they contain spaces, so don't quote them.
+
+# Domain name. If you do not have one, the public IP of the machine.
+# For example: 198.51.100.1, or openvidu.example.com
+DOMAIN_OR_PUBLIC_IP=
+
+# OpenVidu SECRET used for apps to connect to OpenVidu server and users to access to OpenVidu Dashboard
+OPENVIDU_SECRET=
+
+# Certificate type:
+# - selfsigned:  Self signed certificate. Not recommended for production use.
+#                Users will see an ERROR when connected to web page.
+# - owncert:     Valid certificate purchased in a Internet services company.
+#                Please put the certificates files inside folder ./owncert
+#                with names certificate.key and certificate.cert
+# - letsencrypt: Generate a new certificate using letsencrypt. Please set the
+#                required contact email for Let's Encrypt in LETSENCRYPT_EMAIL
+#                variable.
+CERTIFICATE_TYPE=selfsigned
+
+# If CERTIFICATE_TYPE=letsencrypt, you need to configure a valid email for notifications
+LETSENCRYPT_EMAIL=user@example.com
+...
+```
+
+`.env` 파일을 수정해서 openvidu 환경설정을 마무리 해야합니다.
+
+1. `DOMAIN_OR_PUBLIC_IP`과 `OPENVIDU_SECRET` 값을 변경해주세요. 값이 비어있으면 작동이 안됩니다.
+2. `CERTIFICATE_TYPE`을 변경해야합니다. 기본값은 selfsigned일텐데 저희는 외부(프론트엔드)에서 접속을 할 것이기에 자동으로 인증서를 발급해주는 letsencrypt로 변경해주었습니다.  
+   메일 주소도 설정해주어야 하는데 실제 존재하는 메일주소를 입력해주세요.  
+   원래대로라면 NGINX를 설치하고 certbot을 통해 letsencrypt 인증서를 발급받아야하지만 openvidu deployment에서 위와 같은 작업을 .env 설정 변경을 통해 다 해줍니다. (저는 openvidu가 이러한 작업을 해주는지 모르고 여러 삽질을 했습니다.)
+
+## 실행시키기
+
+실행은 아래 명령어를 통해 실행시킬 수 있습니다.
+
+```
+./openvidu start
+```
+
+그러면 아래와 같은 화면이 나오게 되고
+
+```
+Creating openvidu-docker-compose_coturn_1          ... done
+Creating openvidu-docker-compose_app_1             ... done
+Creating openvidu-docker-compose_kms_1             ... done
+Creating openvidu-docker-compose_nginx_1           ... done
+Creating openvidu-docker-compose_redis_1           ... done
+Creating openvidu-docker-compose_openvidu-server_1 ... done
+```
+
+```
+----------------------------------------------------
+
+   OpenVidu Platform is ready!
+   ---------------------------
+
+   * OpenVidu Server: https://DOMAIN_OR_PUBLIC_IP/
+
+   * OpenVidu Dashboard: https://DOMAIN_OR_PUBLIC_IP/dashboard/
+
+----------------------------------------------------
+```
+
+해당 화면이 나오게 된다면 성공적으로 완료된 것입니다.  
+start 외에도 stop, restart 같은 명령어를 사용할 수 있습니다.  
+./openvidu start를 하게 되면 도커 컴포즈 파일을 실행 시키는 것이기에
+
+```
+docker compose up -d
+```
+
+로 진행해도 성공적으로 작동하게 됩니다.
+
+## 내가 개발한 openvidu based application 배포
+
+본인이 개발한 openvidu based application을 배포 하고 싶다면 해당 어플리케이션을 도커 이미지화 한 다음
+`docker-compose.override.yml`을 수정해야합니다.
+
+```
+version: '3.1'
+
+services:
+    app:
+        image: your-image-name:X.Y.Z
+        restart: on-failure
+        network_mode: host
+        environment:
+            - SERVER_PORT=5442
+            - OPENVIDU_URL=http://localhost:5443
+            - OPENVIDU_SECRET=${OPENVIDU_SECRET}
+```
+
+위의 코드에서 image를 application의 이미지로 수정하면 됩니다.  
+기본값은 openvidu가 제공하는 비디오 회의 앱입니다.  
+위의 이미지만 수정하면 도메인 주소로 접속시 설정한 어플리케이션이 나타나는 것을 확인할 수 있습니다.
+
+## NGINX 설정 변경
+
+하지만 저의 경우에는 당장 프론트엔드 배포가 아닌 2개의 백엔드 서버를 올려야 했기에 NGINX 설정을 수정해야 했습니다.  
+저와 같은 사람을 위해 openvidu에서 어떻게 해야하는지 알려줍니다.
+
+1. openvidu가 정상적으로 돌아갈 수 있게 .env 파일을 수정한 후 최소 한번 openvidu server를 실행시켜야합니다. 그래야 nginx를 수정할 수 있는 default.conf가 생성 됩니다.
+2. nginx가 실행중일 때 아래 명령어를 통해 nginx의 설정 파일을 가져옵니다.
+
+```
+sudo su
+cd /opt/openvidu
+docker-compose exec nginx cat /etc/nginx/conf.d/default.conf > custom-nginx.conf
+docker-compose exec nginx cat /etc/nginx/nginx.conf > nginx.conf
+```
+
+위 명령어를 실행하면 `/opt/openvidu/custom-nginx.conf`와 `/opt/openvidu/nginx.conf`가 생성됩니다. 3. /opt/openvidu에서 생성된 custon-nginx.conf를 수정하면 됩니다. 4. nginx.conf도 수정할 수 있지만 아래의 코드를 지우면 custon-nginx.conf를 불러올 수 없습니다.
+
+```
+include /etc/nginx/conf.d/*.conf;
+include /etc/nginx/vhost.d/*.conf;
+```
+
+5. 아래 코드를 추가하여 nginx 서비스에 volume을 추가합니다.
+
+```
+    nginx:
+        ...
+        volumes:
+            ...
+            - ./custom-nginx.conf:/custom-nginx/custom-nginx.conf
+            - ./nginx.conf:/etc/nginx/nginx.conf
+```
+
+<br/>
+추가적인 어플리케이션을 추가하고 싶다면 docker-compose 파일 수정과 nginx 파일 수정을 통해 완료할 수 있습니다.
+
+저의 경우 custom-nginx.conf에 yourapp에 제가 작성한 백엔드 서버를 우선 넣었고, 비즈니스 백엔드 서버도 추가했습니다.
+
+```
+# Your App
+upstream yourapp {
+    server localhost:5442;
+}
+
+upstream openviduserver {
+    server localhost:5443;
+}
+
+upstream backendserver {
+    server localhost:8081;
+}
+
+upstream jenkinsserver {
+    server localhost:10207;
+}
+...
+
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+
+...
+
+   location /api/v1 {
+        proxy_pass http://backendserver;
+    }
+
+```
+
+docker-compose.override.yml은 다음과 같이 수정했구요
+
+```
+version: '3.1'
+
+services:
+    # --------------------------------------------------------------
+    #
+    #    Change this if your want use your own application.
+    #    It's very important expose your application in port 5442
+    #    and use the http protocol.
+    #
+    #    Default Application
+    #
+    #    Openvidu-Call Version: 2.28.0
+    #
+    # --------------------------------------------------------------
+    app:
+        image: openvidu_api_server
+        restart: on-failure
+        network_mode: host
+        environment:
+            - SERVER_PORT=5442
+            - OPENVIDU_URL=http://localhost:5443
+            - OPENVIDU_SECRET=${OPENVIDU_SECRET}
+            - DB_URL=${DB_URL}
+            - DB_USER=${DB_USER}
+            - DB_PASSWD=${DB_PASSWD}
+        logging:
+            options:
+                max-size: "${DOCKER_LOGS_MAX_SIZE:-100M}"
+        volumes:
+            - /home/ubuntu/recordings:/var/lib/recordings
+
+    back:
+        image: api_server
+        restart: on-failure
+        network_mode: host
+        logging:
+            options:
+                max-size: "${DOCKER_LOGS_MAX_SIZE:-100M}"
+
+```
+
+<!-- ## 삽질한 부분
 
 또한 제 컴퓨터의 크롬 브라우저는 성공적으로 서버 접속이 되는데, 다른 브라우저와
-팀원들의 컴퓨터는 접속할 수 없는 문제가 있었습니다  
-이 문제는 .env 파일에서 ssl 관련 인증을 letsencrypt로 수정하면서 해결되었습니다.  
-공식 문서에서 서로 다른 하드웨어에 서비스들을 각각 구축할 경우, 프록시 서버를 통해 통신해야한다고 이야기 했지만  
-제 크롬 브라우저에서는 성공적으로 접속한 점과 openvidu 컨테이너에서 이미 nginx를 사용하는데, 내가 어떻게 건들 수 있나? 라는 생각 때문에 많은 삽질과 시간을 버렸습니다...  
-우선 제 브라우저가 이상해서 접속이 되었던 것이고, openvidu deployment에서 nginx 컨테이너도 포함되어있기에 .env파일을 수정하는 것만으로 ssl 인증서 발급과 https 프록시 서버까지 해결해줍니다.  
+팀원들의 컴퓨터는 접속할 수 없는 문제가 있었습니다
+이 문제는 .env 파일에서 ssl 관련 인증을 letsencrypt로 수정하면서 해결되었습니다.
+공식 문서에서 서로 다른 하드웨어에 서비스들을 각각 구축할 경우, 프록시 서버를 통해 통신해야한다고 이야기 했지만
+제 크롬 브라우저에서는 성공적으로 접속한 점과 openvidu 컨테이너에서 이미 nginx를 사용하는데, 내가 어떻게 건들 수 있나? 라는 생각 때문에 많은 삽질과 시간을 버렸습니다...
+우선 제 브라우저가 이상해서 접속이 되었던 것이고, openvidu deployment에서 nginx 컨테이너도 포함되어있기에 .env파일을 수정하는 것만으로 ssl 인증서 발급과 https 프록시 서버까지 해결해줍니다.
 편하게 사용하시면 됩니다.
 
-기본적으로 ./openvidu start 명령어는 docker compose 명령어를 실행하는 것이기에  
+기본적으로 ./openvidu start 명령어는 docker compose 명령어를 실행하는 것이기에
 docker에 대해서 잘 모르시는 분들은 공부를 해보시고 구축하시면 도움이 많이 될것입니다.
 
-처음 글을 작성할 때는 대단한 것을 발견한 것처럼 썼는데 docker compose가 어떻게 구성되는지 알고 나서는  
-너무 당연한 내용들이네요
+처음 글을 작성할 때는 대단한 것을 발견한 것처럼 썼는데 docker compose가 어떻게 구성되는지 알고 나서는
+너무 당연한 내용들이네요 -->
 
 ## Reference
 
@@ -112,6 +426,7 @@ docker에 대해서 잘 모르시는 분들은 공부를 해보시고 구축하�
 [openvidu 공식 문서-온프레미스로 배포하기](https://docs.openvidu.io/en/stable/deployment/ce/on-premises/)  
 [openvidu 공식 문서-openvidu 어플리케이션 배포관련](https://docs.openvidu.io/en/stable/deployment/deploying-openvidu-apps/#with-docker)  
 [openvidu 공식 문서-openvidu 리액트 클라이언트 예제](https://docs.openvidu.io/en/stable/tutorials/openvidu-react/)  
+[openvidu nginx 설정 변경](https://docs.openvidu.io/en/2.28.0/troubleshooting/#162-modify-openvidu-nginx-configuration)
 [openvidu 배포 관련 게시글](https://hoonti06.gitlab.io/wiki/deploying-openvidu-on-premises/#openvidu%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94-application%EC%9D%84-openvidu%EA%B0%80-%EB%B0%B0%ED%8F%AC%EB%90%98%EB%8A%94-%EC%84%9C%EB%B2%84%EC%97%90-%EA%B0%99%EC%9D%B4-%EB%B0%B0%ED%8F%AC%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95)
 [싸피 선배님의 조언-포트관련](https://velog.io/@kwak0568/OpenVidu-%EB%B0%B0%ED%8F%AC-Port%EC%99%80%EC%9D%98-%EC%A0%84%EC%9F%81)
 
