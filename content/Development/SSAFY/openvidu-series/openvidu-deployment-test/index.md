@@ -1,7 +1,7 @@
 ---
 emoji: 💻
 title: Openvidu Deployment EC2 온프레미스 구축 후기
-date: '2023-08-05 00:00:00'
+date: '2023-08-06 11:00:00'
 author: 하이영
 tags: EC2 아키텍처 openvidu docker
 categories: 개발공부 featured
