@@ -44,6 +44,9 @@ openvidu를 통해 화상 기능을 제공하는 것이 저희 프로젝트의 �
 
 ![구조도](00.png)
 
+<br/>
+<br/>
+
 ## 설치 전 주의할 점
 
 ![포트 이미지](01.png)
@@ -53,10 +56,15 @@ openvidu를 통해 화상 기능을 제공하는 것이 저희 프로젝트의 �
   저는 [해당글](https://velog.io/@kwak0568/OpenVidu-%EB%B0%B0%ED%8F%AC-Port%EC%99%80%EC%9D%98-%EC%A0%84%EC%9F%81)을 보고 서버를 받자마자 openvidu deployment를 설치했습니다.
 - openvidu deployment에 커스텀된 NGINX도 포함되니 가급적 openvidu deployment 먼저 설치하시는걸 추천합니다.
 
+<br/>
+<br/>
+
 ## 도커 설치
 
 openvidu deployment를 설치하기 위해서는 도커가 설치되어 있어야 합니다.  
 가장 좋은건 [공식문서](https://docs.docker.com/engine/install/#server)를 보고 설치하는 것이지만 아래에도 적어 놓겠습니다. 서버의 OS가 Ubuntu 20.04이기에 아래 과정은 Ubuntu 20.04 기준입니다.
+
+<br/>
 
 ### 구버전 지우기
 
@@ -72,9 +80,13 @@ EC2를 새로 발급받은 상태면 필요없을 수 있지만 혹시 모르니
 for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
 ```
 
+<br/>
+
 ### apt repository를 통해 설치
 
 설치 방법도 4가지 정도 있지만 제기준 가장 편한 apt repository를 통해 설치하겠습니다.
+
+<br/>
 
 #### repository 설정
 
@@ -108,6 +120,8 @@ echo \
 sudo apt-get update
 ```
 
+<br/>
+
 #### 도커 엔진 설치
 
 1. 아래 명령어를 통해 최신 버전의 도커 엔진, containerd, 도커 컴포즈를 설치합니다.
@@ -127,6 +141,9 @@ sudo docker run hello-world
 <br/>
 위와 같이 화면이 나온다면 성공적으로 완료된 것입니다.
 
+<br/>
+<br/>
+
 ## 포트 개방
 
 ```
@@ -141,6 +158,9 @@ ufw allow 57001:65535/tcp
 ufw allow 57001:65535/udp
 ufw enable
 ```
+
+<br/>
+<br/>
 
 포트 개방 전 ufw가 설치 되어있는지 확인하시기 바랍니다.(제가 받은 EC2는 설치 되어있었습니다.)
 
@@ -184,6 +204,9 @@ For more information, check:
 https://docs.openvidu.io/en/stable/deployment/ce/on-premises/
 ```
 
+<br/>
+<br/>
+
 ## 파일 설정
 
 ```
@@ -223,6 +246,9 @@ LETSENCRYPT_EMAIL=user@example.com
 2. `CERTIFICATE_TYPE`을 변경해야합니다. 기본값은 selfsigned일텐데 저희는 외부(프론트엔드)에서 접속을 할 것이기에 자동으로 인증서를 발급해주는 letsencrypt로 변경해주었습니다.  
    메일 주소도 설정해주어야 하는데 실제 존재하는 메일주소를 입력해주세요.  
    원래대로라면 NGINX를 설치하고 certbot을 통해 letsencrypt 인증서를 발급받아야하지만 openvidu deployment에서 위와 같은 작업을 .env 설정 변경을 통해 다 해줍니다. (저는 openvidu가 이러한 작업을 해주는지 모르고 여러 삽질을 했습니다.)
+
+<br/>
+<br/>
 
 ## 실행시키기
 
@@ -266,6 +292,9 @@ docker compose up -d
 
 로 진행해도 성공적으로 작동하게 됩니다.
 
+<br/>
+<br/>
+
 ## 내가 개발한 openvidu based application 배포
 
 본인이 개발한 openvidu based application을 배포 하고 싶다면 해당 어플리케이션을 도커 이미지화 한 다음
@@ -288,6 +317,9 @@ services:
 위의 코드에서 image를 application의 이미지로 수정하면 됩니다.  
 기본값은 openvidu가 제공하는 비디오 회의 앱입니다.  
 위의 이미지만 수정하면 도메인 주소로 접속시 설정한 어플리케이션이 나타나는 것을 확인할 수 있습니다.
+
+<br/>
+<br/>
 
 ## NGINX 설정 변경
 
