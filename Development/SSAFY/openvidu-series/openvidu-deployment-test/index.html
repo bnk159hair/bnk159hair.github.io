@@ -115,6 +115,8 @@
         decoding="async"
       />
     </span></p>
+<br/>
+<br/>
 <h2 id="설치-전-주의할-점" style="position:relative;"><a href="#%EC%84%A4%EC%B9%98-%EC%A0%84-%EC%A3%BC%EC%9D%98%ED%95%A0-%EC%A0%90" aria-label="설치 전 주의할 점 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>설치 전 주의할 점</h2>
 <p><span
       class="gatsby-resp-image-wrapper"
@@ -145,9 +147,12 @@
 저는 <a href="https://velog.io/@kwak0568/OpenVidu-%EB%B0%B0%ED%8F%AC-Port%EC%99%80%EC%9D%98-%EC%A0%84%EC%9F%81">해당글</a>을 보고 서버를 받자마자 openvidu deployment를 설치했습니다.</li>
 <li>openvidu deployment에 커스텀된 NGINX도 포함되니 가급적 openvidu deployment 먼저 설치하시는걸 추천합니다.</li>
 </ul>
+<br/>
+<br/>
 <h2 id="도커-설치" style="position:relative;"><a href="#%EB%8F%84%EC%BB%A4-%EC%84%A4%EC%B9%98" aria-label="도커 설치 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>도커 설치</h2>
 <p>openvidu deployment를 설치하기 위해서는 도커가 설치되어 있어야 합니다.<br>
 가장 좋은건 <a href="https://docs.docker.com/engine/install/#server">공식문서</a>를 보고 설치하는 것이지만 아래에도 적어 놓겠습니다. 서버의 OS가 Ubuntu 20.04이기에 아래 과정은 Ubuntu 20.04 기준입니다.</p>
+<br/>
 <h3 id="구버전-지우기" style="position:relative;"><a href="#%EA%B5%AC%EB%B2%84%EC%A0%84-%EC%A7%80%EC%9A%B0%EA%B8%B0" aria-label="구버전 지우기 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>구버전 지우기</h3>
 <p>EC2를 새로 발급받은 상태면 필요없을 수 있지만 혹시 모르니 진행합니다.<br>
 지워야할 패키지는 다음과 같습니다.</p>
@@ -158,8 +163,10 @@
 <li>podman-docker</li>
 </ul>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done</code></pre></div>
+<br/>
 <h3 id="apt-repository를-통해-설치" style="position:relative;"><a href="#apt-repository%EB%A5%BC-%ED%86%B5%ED%95%B4-%EC%84%A4%EC%B9%98" aria-label="apt repository를 통해 설치 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>apt repository를 통해 설치</h3>
 <p>설치 방법도 4가지 정도 있지만 제기준 가장 편한 apt repository를 통해 설치하겠습니다.</p>
+<br/>
 <h4 id="repository-설정" style="position:relative;"><a href="#repository-%EC%84%A4%EC%A0%95" aria-label="repository 설정 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>repository 설정</h4>
 <ol>
 <li>apt 패키지 인덱스를 업데이트 하고 https로 repository를 이용할 수 있게 apt에 패키지를 설치합니다.</li>
@@ -183,6 +190,7 @@ sudo chmod a+r /etc/apt/keyrings/docker.gpg</code></pre></div>
 <li>apt 패키지 인덱스를 update 합니다.</li>
 </ol>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">sudo apt-get update</code></pre></div>
+<br/>
 <h4 id="도커-엔진-설치" style="position:relative;"><a href="#%EB%8F%84%EC%BB%A4-%EC%97%94%EC%A7%84-%EC%84%A4%EC%B9%98" aria-label="도커 엔진 설치 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>도커 엔진 설치</h4>
 <ol>
 <li>아래 명령어를 통해 최신 버전의 도커 엔진, containerd, 도커 컴포즈를 설치합니다.</li>
@@ -217,6 +225,8 @@ sudo chmod a+r /etc/apt/keyrings/docker.gpg</code></pre></div>
     </span></p>
 <br/>
 위와 같이 화면이 나온다면 성공적으로 완료된 것입니다.
+<br/>
+<br/>
 <h2 id="포트-개방" style="position:relative;"><a href="#%ED%8F%AC%ED%8A%B8-%EA%B0%9C%EB%B0%A9" aria-label="포트 개방 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>포트 개방</h2>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">ufw allow ssh
 ufw allow 80/tcp
@@ -228,6 +238,8 @@ ufw allow 40000:57000/udp
 ufw allow 57001:65535/tcp
 ufw allow 57001:65535/udp
 ufw enable</code></pre></div>
+<br/>
+<br/>
 <p>포트 개방 전 ufw가 설치 되어있는지 확인하시기 바랍니다.(제가 받은 EC2는 설치 되어있었습니다.)</p>
 <h2 id="deployment-설치" style="position:relative;"><a href="#deployment-%EC%84%A4%EC%B9%98" aria-label="deployment 설치 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Deployment 설치</h2>
 <ol>
@@ -260,6 +272,8 @@ $ ./openvidu start
 
 For more information, check:
 https://docs.openvidu.io/en/stable/deployment/ce/on-premises/</code></pre></div>
+<br/>
+<br/>
 <h2 id="파일-설정" style="position:relative;"><a href="#%ED%8C%8C%EC%9D%BC-%EC%84%A4%EC%A0%95" aria-label="파일 설정 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>파일 설정</h2>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text"># OpenVidu configuration
 # ----------------------
@@ -296,6 +310,8 @@ LETSENCRYPT_EMAIL=user@example.com
 메일 주소도 설정해주어야 하는데 실제 존재하는 메일주소를 입력해주세요.<br>
 원래대로라면 NGINX를 설치하고 certbot을 통해 letsencrypt 인증서를 발급받아야하지만 openvidu deployment에서 위와 같은 작업을 .env 설정 변경을 통해 다 해줍니다. (저는 openvidu가 이러한 작업을 해주는지 모르고 여러 삽질을 했습니다.)</li>
 </ol>
+<br/>
+<br/>
 <h2 id="실행시키기" style="position:relative;"><a href="#%EC%8B%A4%ED%96%89%EC%8B%9C%ED%82%A4%EA%B8%B0" aria-label="실행시키기 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>실행시키기</h2>
 <p>실행은 아래 명령어를 통해 실행시킬 수 있습니다.</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">./openvidu start</code></pre></div>
@@ -321,6 +337,8 @@ start 외에도 stop, restart 같은 명령어를 사용할 수 있습니다.<br
 ./openvidu start를 하게 되면 도커 컴포즈 파일을 실행 시키는 것이기에</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">docker compose up -d</code></pre></div>
 <p>로 진행해도 성공적으로 작동하게 됩니다.</p>
+<br/>
+<br/>
 <h2 id="내가-개발한-openvidu-based-application-배포" style="position:relative;"><a href="#%EB%82%B4%EA%B0%80-%EA%B0%9C%EB%B0%9C%ED%95%9C-openvidu-based-application-%EB%B0%B0%ED%8F%AC" aria-label="내가 개발한 openvidu based application 배포 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>내가 개발한 openvidu based application 배포</h2>
 <p>본인이 개발한 openvidu based application을 배포 하고 싶다면 해당 어플리케이션을 도커 이미지화 한 다음
 <code class="language-text">docker-compose.override.yml</code>을 수정해야합니다.</p>
@@ -338,6 +356,8 @@ services:
 <p>위의 코드에서 image를 application의 이미지로 수정하면 됩니다.<br>
 기본값은 openvidu가 제공하는 비디오 회의 앱입니다.<br>
 위의 이미지만 수정하면 도메인 주소로 접속시 설정한 어플리케이션이 나타나는 것을 확인할 수 있습니다.</p>
+<br/>
+<br/>
 <h2 id="nginx-설정-변경" style="position:relative;"><a href="#nginx-%EC%84%A4%EC%A0%95-%EB%B3%80%EA%B2%BD" aria-label="nginx 설정 변경 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>NGINX 설정 변경</h2>
 <p>하지만 저의 경우에는 당장 프론트엔드 배포가 아닌 2개의 백엔드 서버를 올려야 했기에 NGINX 설정을 수정해야 했습니다.<br>
 저와 같은 사람을 위해 openvidu에서 어떻게 해야하는지 알려줍니다.</p>
