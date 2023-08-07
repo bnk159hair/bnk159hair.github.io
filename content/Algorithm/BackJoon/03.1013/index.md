@@ -7,8 +7,6 @@ tags: 알고리즘 백준
 categories: 알고리즘
 ---
 
-# 백준 1013, Contact
-
 <br/>
 
 ## 문제 푸는데 필요한 정보
