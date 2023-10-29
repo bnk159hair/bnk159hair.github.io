@@ -54,6 +54,10 @@ module.exports = {
         date: '2023.01 ~',
         activity: 'SSAFY(삼성청년SW아카데미) 9기',
       },
+      {
+        date: '2023.09 ~ 2023.09',
+        activity: '신한은행 해커톤',
+      },
     ],
 
     projects: [
@@ -87,14 +91,42 @@ module.exports = {
       //   },
       // },
       {
+        title: '백혈구 측정 딥러닝 모델 개발',
+        description:
+          'DVS라는 센서를 통해 모세혈관을 측정하여 백혈구 개수를 카운팅하는 딥러닝 모델 개발을 목표로 수행한 산학연계 팀프로젝트입니다. 해당 프로젝트에서 데이터 시각화 기능을 구현하였습니다.',
+        techStack: ['Python'],
+        thumbnailUrl: '',
+        links: {
+          post: '',
+          github: '',
+          googlePlay: '',
+          appStore: '',
+          demo: '',
+        },
+      },
+      {
         title: 'JourneyJoy - 여행 계획 작성 서비스',
         description:
           '국내 관광지 공공데이터를 기반으로 원하는 지역의 여행지를 조회할 수 있으며 여행지를 선택하여 플랜(여행 계획)을 작성하고 플랜에 대한 리뷰를 사람들과 공유할 수 있는 서비스를 개발하였습니다. 해당 프로젝트에서 데이터베이스 스키마 설계와 카카오맵 API 연동, 플랜 CRUD, 리뷰 CRUD의 기능 구현을 맡았습니다.',
         techStack: ['SpringBoot', 'Vue.js', 'MySQL'],
         thumbnailUrl: 'journeyjoy.png',
         links: {
-          post: '',
+          post: 'eoulim',
           github: '',
+          googlePlay: '',
+          appStore: '',
+          demo: '',
+        },
+      },
+      {
+        title: '어울림 - 교외 지역 아이들을 위한 화상 미팅 서비스',
+        description:
+          '국내 관광지 공공데이터를 기반으로 원하는 지역의 여행지를 조회할 수 있으며 여행지를 선택하여 플랜(여행 계획)을 작성하고 플랜에 대한 리뷰를 사람들과 공유할 수 있는 서비스를 개발하였습니다. 해당 프로젝트에서 데이터베이스 스키마 설계와 카카오맵 API 연동, 플랜 CRUD, 리뷰 CRUD의 기능 구현을 맡았습니다.',
+        techStack: ['SpringBoot', 'Java', 'JPA', 'MySQL', 'Docker', 'Jenkins'],
+        thumbnailUrl: 'eoulim-project.png',
+        links: {
+          post: '',
+          github: 'https://github.com/bnk159hair/Eoullim',
           googlePlay: '',
           appStore: '',
           demo: '',
