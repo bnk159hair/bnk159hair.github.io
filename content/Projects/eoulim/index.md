@@ -4,7 +4,7 @@ title: 어울림
 date: '2023-08-15 23:00:00'
 author: 하이영
 tags: 프로젝트 포트폴리오
-categories: 프로젝트
+categories: Projects
 ---
 
 <img width="20%" src="./assets/logo.png"/>
@@ -128,12 +128,12 @@ jenkins를 gitlab과 연동함으로써 팀원들이 gitlab에 push 후 develop 
 
 - 매칭 페이지
 
-  <img width="50%" src="./assets/가면벗기와 가이드 재생 기능.gif"/>
+  <img width="100%" src="./assets/가면벗기와 가이드 재생 기능.gif"/>
 <br/>
 
 - 녹화 확인 페이지
 
-  <img width="50%" src="./assets/녹화 기능.gif"/>
+  <img width="100%" src="./assets/녹화 기능.gif"/>
 <br/>
 
 - 실제 초등학교 방문
